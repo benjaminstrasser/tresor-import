@@ -42,6 +42,7 @@ export interface Activity {
 export interface Implementation {
   canParseDocument(pages: page[], extension: string);
   parsePages(contents);
+  parsingIsTextBased() : boolean;
 }
 
 export interface ParserResult {
