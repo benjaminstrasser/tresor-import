@@ -19,6 +19,7 @@ import * as smartbroker from './smartbroker';
 import * as traderepublic from './traderepublic';
 import * as unioninvest from './unioninvest';
 import * as peaks from './peaks';
+import * as dadat from './dadat';
 
 export {
   _1822direkt,
@@ -42,4 +43,5 @@ export {
   traderepublic,
   unioninvest,
   peaks,
+  dadat,
 };

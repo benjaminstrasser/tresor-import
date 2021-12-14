@@ -1,0 +1,7 @@
+[
+  [
+    "Handelsdatum;Valutadatum;Transaktion;Instrumentenart;WP-Identifikationsart;WP-Identifikation;WP-Name;Nominale / St�ck;Kurs / Limit;Handelsw�hrung;Zahlungsw�hrung;Kurswert in Zahlungsw�hrung;Summe der eigenen Spesen in Zahlungsw�hrung;Summe der fremden Spesen in Zahlungsw�hrung;aufgelaufene St�ckzinsen in Zahlungsw�hrung;bezahlte / erhaltene KESt in Zahlungsw�hrung;Endbetrag in Zahlungw�hrung;W�hrungskurs;B�rse;Status;Orderart;G�ltigkeit;Lagerland\r",
+    "18.05.2021;20.05.2021;Kauf;Aktie;Isin;US69608A1088;PALANTIR TECHNOLOGIES INC;50;20,53;USD;EUR;843,81;2,7;5,75;0;0;852,26;1,2165;XNYS;ausgef�hrt und abgerechnet;Billigst;Tagesg�ltig;USA\r",
+    "Depotums�tze;Depot: XXXXXXXXXXX;von: 01.01.2021;bis: 14.12.2021;Erzeugt: 14.12.2021 12:08:25;;;;;;;;;;;;;;;;;;"
+  ]
+]

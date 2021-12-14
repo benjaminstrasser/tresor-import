@@ -1,0 +1,7 @@
+[
+  [
+    "Handelsdatum;Valutadatum;Transaktion;Instrumentenart;WP-Identifikationsart;WP-Identifikation;WP-Name;Nominale / St�ck;Kurs / Limit;Handelsw�hrung;Zahlungsw�hrung;Kurswert in Zahlungsw�hrung;Summe der eigenen Spesen in Zahlungsw�hrung;Summe der fremden Spesen in Zahlungsw�hrung;aufgelaufene St�ckzinsen in Zahlungsw�hrung;bezahlte / erhaltene KESt in Zahlungsw�hrung;Endbetrag in Zahlungw�hrung;W�hrungskurs;B�rse;Status;Orderart;G�ltigkeit;Lagerland\r",
+    "06.05.2021;01.06.2021;Aussch�ttung;Aktie;Isin;US4581401001;INTEL CORP.       DL-,001;25;0,3475;USD;EUR;7,1;0;0;0;1,95;5,15;1,2232;;ausgef�hrt und abgerechnet;;;�sterreich\r",
+    "Depotums�tze;Depot: XXXXXXXXXXX;von: 01.01.2021;bis: 14.12.2021;Erzeugt: 14.12.2021 12:08:25;;;;;;;;;;;;;;;;;;"
+  ]
+]

@@ -8,7 +8,10 @@ const readTestFile = (file, parseAsJson) => {
   const content = fs.readFileSync(file, 'utf8');
   return parseAsJson
     ? JSON.parse(csvLinesToJSON(content, parseAsJson))
-    : content.trim().split('\n');
+    : content
+        .trim()
+        .split('\n')
+        .map(line => line.trim());
 };
 
 describe('Generic CSV', function () {

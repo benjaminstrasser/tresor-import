@@ -1,0 +1,7 @@
+[
+  [
+    "Handelsdatum;Valutadatum;Transaktion;Instrumentenart;WP-Identifikationsart;WP-Identifikation;WP-Name;Nominale / St�ck;Kurs / Limit;Handelsw�hrung;Zahlungsw�hrung;Kurswert in Zahlungsw�hrung;Summe der eigenen Spesen in Zahlungsw�hrung;Summe der fremden Spesen in Zahlungsw�hrung;aufgelaufene St�ckzinsen in Zahlungsw�hrung;bezahlte / erhaltene KESt in Zahlungsw�hrung;Endbetrag in Zahlungw�hrung;W�hrungskurs;B�rse;Status;Orderart;G�ltigkeit;Lagerland\r",
+    "06.12.2021;09.12.2021;Verkauf;Aktie;Isin;US0567521085;BAIDU INC.A ADR DL-,00005;5;136,26;USD;EUR;602,17;7,5;3,76;0;0;590,91;1,1314;XNMS;ausgef�hrt und abgerechnet;Bestens;Ultimo laufende Woche;USA\r",
+    "Depotums�tze;Depot: XXXXXXXXXXX;von: 01.01.2021;bis: 14.12.2021;Erzeugt: 14.12.2021 12:08:25;;;;;;;;;;;;;;;;;;"
+  ]
+]

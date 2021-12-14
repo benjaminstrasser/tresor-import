@@ -1,0 +1,7 @@
+[
+  [
+    "Handelsdatum;Valutadatum;Transaktion;Instrumentenart;WP-Identifikationsart;WP-Identifikation;WP-Name;Nominale / St�ck;Kurs / Limit;Handelsw�hrung;Zahlungsw�hrung;Kurswert in Zahlungsw�hrung;Summe der eigenen Spesen in Zahlungsw�hrung;Summe der fremden Spesen in Zahlungsw�hrung;aufgelaufene St�ckzinsen in Zahlungsw�hrung;bezahlte / erhaltene KESt in Zahlungsw�hrung;Endbetrag in Zahlungw�hrung;W�hrungskurs;B�rse;Status;Orderart;G�ltigkeit;Lagerland\r",
+    "28.07.2021;30.07.2021;Kauf;Investmentfonds/ETFs;Isin;LU1781541179;MUL-Lyx.Cor.MSCI Wld DR U.ETF;190;13,072;EUR;EUR;2483,68;4,05;2,55;0;0;2490,28;1;XETR;ausgef�hrt und abgerechnet;Billigst;Tagesg�ltig;Deutschland\r",
+    "Depotums�tze;Depot: XXXXXXXXXXX;von: 01.01.2021;bis: 14.12.2021;Erzeugt: 14.12.2021 12:08:25;;;;;;;;;;;;;;;;;;"
+  ]
+]
