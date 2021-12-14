@@ -98,8 +98,6 @@ export const parsePages = contents => {
 
   const documentType = getDocumentType(contents);
   switch (documentType) {
-    // This type of file contains Dividends and other information. Only dividends are processed. This is not implemented
-    // yet as the dividends lack the information how many shares are in the account
     case 'PortfolioTransactions':
       return {
         activities: parsePortfolioTransactions(contents),
