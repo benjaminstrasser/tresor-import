@@ -5,6 +5,7 @@ import {
   sellSamples,
   dividendSamples,
   allSamples,
+  manualTest,
 } from './__mocks__/dadat';
 
 describe('Broker: dadat', () => {
@@ -147,6 +148,11 @@ describe('Broker: dadat', () => {
         foreignCurrency: 'HKD',
       });
     });
+  });
+
+  test('manualTest', () => {
+    const activities = dadat.parsePages(manualTest[0]).activities;
+    expect(activities.filter(activity => activity).length).toEqual(75);
   });
 
   beforeEach(() => {

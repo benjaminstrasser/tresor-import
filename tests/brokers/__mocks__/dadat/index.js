@@ -13,4 +13,12 @@ export const dividendSamples = [
   require('./portfolio_transactions/dividend/dividend_sample_1.json'),
 ];
 
-export const allSamples = buySamples.concat(sellSamples, dividendSamples);
+export const manualTest = [
+  require('./portfolio_transactions/portfolio_3821.json'),
+];
+
+export const allSamples = buySamples.concat(
+  sellSamples,
+  dividendSamples,
+  manualTest
+);

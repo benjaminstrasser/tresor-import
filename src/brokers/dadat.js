@@ -38,7 +38,8 @@ const parsePortfolioTransactions = contents => {
     const [date, datetime] = createActivityDateTime(
       content[TRANSACTION_DATE_IDX],
       '12:00', // dadat does not display the time of trades
-      'dd.MM.yyyy'
+      'dd.MM.yy',
+      'dd.MM.yy HH:mm'
     );
     const activity = {
       broker: 'dadat',
