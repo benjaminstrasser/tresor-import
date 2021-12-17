@@ -179,6 +179,12 @@ const getDocumentType = content => {
     return 'AccountDepot-PortfolioTransactions';
   } else if (content[0].includes('Kontoums�tze')) {
     return 'AccountDepot-AccountTransactions';
+  } else if (
+    content[0].includes(
+      'Handelsdatum;Valutadatum;Transaktion;Instrumentenart;WP-Identifikationsart;WP-Identifikation;WP-Name;Nominale / St�ck;Kurs / Limit'
+    )
+  ) {
+    return 'Service-AccountTransactions';
   }
   return undefined;
 };
@@ -198,7 +204,7 @@ export const parsePages = contents => {
         activities: parseAccountDepotPortfolioTransactions(contents),
         status: 0,
       };
-    case 'AccountDepot-AccountTransactions':
+    default:
       return {
         activities: [],
         status: 7,
