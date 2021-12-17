@@ -1,0 +1,16 @@
+[
+  [
+    "Depotums�tze;;;;;;;;;;;;;;;;;\r",
+    "Depotauswahl;7823732800;;;;;;;;;;;;;;;;\r",
+    "Zeitraumauswahl;alle Zeitr�ume;;;;;;;;;;;;;;;;\r",
+    ";;;;;;;;;;;;;;;;;\r",
+    ";;;;;;;;;;;;;;;;;\r",
+    "Handelsdatum;Valutadatum;Bezeichnung;ISIN/WKN;Stk./Nom.;;Ausf�hrungskurs;;Spesen;;Steuern;;Kurswert;;Betrag;;Transaktion;Ordernummer\r",
+    "06.12.2021;09.12.2021;BAIDU INC.A ADR DL-,00005;US0567521085;5;Stk.;136,26;USD;11,26;�;0;�;602,17;�;590,91;�;Verkauf;X.XXX.XXX\r",
+    "05.08.2021;01.09.2021;INTEL CORP.       DL-,001;US4581401001;25;Stk.;0,3475;USD;0;�;2,01;�;7,32;�;5,31;�;Aussch�ttung;X.XXX.XXX\r",
+    "14.07.2021;14.07.2021;MUL-Lyx.Cor.MSCI Wld DR U.ETF;LU1781541179;212;Stk.;0;USD;0;�;3,45;�;0;�;-3,45;�;Aussch�ttung;X.XXX.XXX\r",
+    "04.06.2021;28.06.2021;POLYUS PJSC GDR 1/2;US73181M1172;9;Stk.;2,64284;USD;0,3;�;5,45;�;19,82;�;14,07;�;Aussch�ttung;X.XXX.XXX\r",
+    "01.06.2021;02.06.2021;BAIDU INC.A ADR DL-,00005;US0567521085;5;Stk.;200,71;USD;11,42;�;0;�;827,26;�;838,68;�;Kauf;X.XXX.XXX\r",
+    "24.05.2021;07.06.2021;TENCENT HLDGS   HD-,00002;KYG875721634;11;Stk.;1,6;HKD;0;�;0,51;�;1,86;�;1,35;�;Aussch�ttung;X.XXX.XXX\r"
+  ]
+]
