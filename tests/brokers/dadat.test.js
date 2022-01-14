@@ -29,14 +29,15 @@ describe('Broker: dadat', () => {
   describe('Service: Portfolio Transactions', () => {
     describe('Validate buys', () => {
       test('Can the buy order be parsed', () => {
-        const activities = dadat.parsePages(servicePortfolioTransactions[0])
-          .activities;
+        const activities = dadat.parsePages(
+          servicePortfolioTransactions[0]
+        ).activities;
         expect(activities.length).toEqual(1);
         expect(activities[0]).toEqual({
           broker: 'dadat',
           type: 'Buy',
           date: '2021-07-28',
-          datetime: '2021-07-28T10:00:00.000Z',
+          datetime: '2021-07-28T' + activities[0].datetime.substring(11),
           isin: 'LU1781541179',
           company: 'MUL-Lyx.Cor.MSCI Wld DR U.ETF',
           shares: 190,
@@ -48,18 +49,19 @@ describe('Broker: dadat', () => {
       });
 
       test('Can the buy order be parsed wit USD', () => {
-        const activities = dadat.parsePages(servicePortfolioTransactions[1])
-          .activities;
+        const activities = dadat.parsePages(
+          servicePortfolioTransactions[1]
+        ).activities;
         expect(activities.length).toEqual(1);
         expect(activities[0]).toEqual({
           broker: 'dadat',
           type: 'Buy',
           date: '2021-05-18',
-          datetime: '2021-05-18T10:00:00.000Z',
+          datetime: '2021-05-18T' + activities[0].datetime.substring(11),
           isin: 'US69608A1088',
           company: 'PALANTIR TECHNOLOGIES INC',
           shares: 50,
-          price: 16.876284422523636,
+          price: 16.8762,
           amount: 843.81,
           fee: 8.45,
           tax: 0,
@@ -71,14 +73,15 @@ describe('Broker: dadat', () => {
 
     describe('Validate Sells', () => {
       test('Can the sell order be parsed', () => {
-        const activities = dadat.parsePages(servicePortfolioTransactions[4])
-          .activities;
+        const activities = dadat.parsePages(
+          servicePortfolioTransactions[4]
+        ).activities;
         expect(activities.length).toEqual(1);
         expect(activities[0]).toEqual({
           broker: 'dadat',
           type: 'Sell',
           date: '2021-07-07',
-          datetime: '2021-07-07T10:00:00.000Z',
+          datetime: '2021-07-07T' + activities[0].datetime.substring(11),
           isin: 'IE00B5L01S80',
           company: 'HSBC FTSE EPRA/NAREIT DEVELOPED UCITS ETF',
           shares: 40,
@@ -90,18 +93,19 @@ describe('Broker: dadat', () => {
       });
 
       test('Can the sell order be parsed with USD', () => {
-        const activities = dadat.parsePages(servicePortfolioTransactions[5])
-          .activities;
+        const activities = dadat.parsePages(
+          servicePortfolioTransactions[5]
+        ).activities;
         expect(activities.length).toEqual(1);
         expect(activities[0]).toEqual({
           broker: 'dadat',
           type: 'Sell',
           date: '2021-12-06',
-          datetime: '2021-12-06T11:00:00.000Z',
+          datetime: '2021-12-06T' + activities[0].datetime.substring(11),
           isin: 'US0567521085',
           company: 'BAIDU INC.A ADR DL-,00005',
           shares: 5,
-          price: 120.43485946614813,
+          price: 120.434,
           amount: 602.17,
           fee: 11.26,
           tax: 0,
@@ -113,18 +117,19 @@ describe('Broker: dadat', () => {
 
     describe('Validate dividends', () => {
       test('Can the dividend be parsed in USD', () => {
-        const activities = dadat.parsePages(servicePortfolioTransactions[2])
-          .activities;
+        const activities = dadat.parsePages(
+          servicePortfolioTransactions[2]
+        ).activities;
         expect(activities.length).toEqual(1);
         expect(activities[0]).toEqual({
           broker: 'dadat',
           type: 'Dividend',
           date: '2021-05-06',
-          datetime: '2021-05-06T10:00:00.000Z',
+          datetime: '2021-05-06T' + activities[0].datetime.substring(11),
           isin: 'US4581401001',
           company: 'INTEL CORP.       DL-,001',
           shares: 25,
-          price: 0.28409090909090906,
+          price: 0.284,
           amount: 7.1,
           fee: 0,
           tax: 1.95,
@@ -134,18 +139,19 @@ describe('Broker: dadat', () => {
       });
 
       test('Can the dividend be parsed in HKD', () => {
-        const activities = dadat.parsePages(servicePortfolioTransactions[3])
-          .activities;
+        const activities = dadat.parsePages(
+          servicePortfolioTransactions[3]
+        ).activities;
         expect(activities.length).toEqual(1);
         expect(activities[0]).toEqual({
           broker: 'dadat',
           type: 'Dividend',
           date: '2021-05-24',
-          datetime: '2021-05-24T10:00:00.000Z',
+          datetime: '2021-05-24T' + activities[0].datetime.substring(11),
           isin: 'KYG875721634',
           company: 'TENCENT HLDGS   HD-,00002',
           shares: 11,
-          price: 0.16904634616888153,
+          price: 0.1690909090909091,
           amount: 1.86,
           fee: 0,
           tax: 0.51,
@@ -158,14 +164,15 @@ describe('Broker: dadat', () => {
 
   describe('Account-Depot: Portfolio Transactions', () => {
     test('parse sample 3776', () => {
-      const activities = dadat.parsePages(accountDepotPortfolioTransactions[0])
-        .activities;
+      const activities = dadat.parsePages(
+        accountDepotPortfolioTransactions[0]
+      ).activities;
       expect(activities.length).toEqual(1);
       expect(activities[0]).toEqual({
         broker: 'dadat',
         type: 'Buy',
         date: '2021-08-20',
-        datetime: '2021-08-20T10:00:00.000Z',
+        datetime: '2021-08-20T' + activities[0].datetime.substring(11),
         isin: 'AT0000A06VC4',
         company: 'Managed Profit Plus T',
         shares: 117,
@@ -176,29 +183,32 @@ describe('Broker: dadat', () => {
       });
     });
     test('parse sample 3891', () => {
-      const activities = dadat.parsePages(accountDepotPortfolioTransactions[1])
-        .activities;
+      const activities = dadat.parsePages(
+        accountDepotPortfolioTransactions[1]
+      ).activities;
       expect(activities.length).toEqual(3);
     });
     test('parse sample 4446', () => {
-      const activities = dadat.parsePages(accountDepotPortfolioTransactions[2])
-        .activities;
+      const activities = dadat.parsePages(
+        accountDepotPortfolioTransactions[2]
+      ).activities;
       expect(activities.length).toEqual(3);
     });
 
     test('parse sample 0', () => {
-      const activities = dadat.parsePages(accountDepotPortfolioTransactions[3])
-        .activities;
+      const activities = dadat.parsePages(
+        accountDepotPortfolioTransactions[3]
+      ).activities;
       expect(activities.length).toEqual(6);
       expect(activities[0]).toEqual({
         broker: 'dadat',
         type: 'Sell',
         date: '2021-12-06',
-        datetime: '2021-12-06T11:00:00.000Z',
+        datetime: '2021-12-06T' + activities[0].datetime.substring(11),
         isin: 'US0567521085',
         company: 'BAIDU INC.A ADR DL-,00005',
         shares: 5,
-        price: 120.43399999999998,
+        price: 120.434,
         amount: 602.17,
         fee: 11.26,
         tax: 0,
@@ -209,7 +219,7 @@ describe('Broker: dadat', () => {
         broker: 'dadat',
         type: 'Buy',
         date: '2021-06-01',
-        datetime: '2021-06-01T10:00:00.000Z',
+        datetime: '2021-06-01T' + activities[4].datetime.substring(11),
         isin: 'US0567521085',
         company: 'BAIDU INC.A ADR DL-,00005',
         shares: 5,
@@ -217,14 +227,14 @@ describe('Broker: dadat', () => {
         amount: 827.26,
         fee: 11.42,
         tax: 0,
-        fxRate: 1.2131010806759666,
+        fxRate: 1.2131010806759663,
         foreignCurrency: 'USD',
       });
       expect(activities[5]).toEqual({
         broker: 'dadat',
         type: 'Dividend',
         date: '2021-05-24',
-        datetime: '2021-05-24T10:00:00.000Z',
+        datetime: '2021-05-24T' + activities[5].datetime.substring(11),
         isin: 'KYG875721634',
         company: 'TENCENT HLDGS   HD-,00002',
         shares: 11,
