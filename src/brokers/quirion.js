@@ -9,11 +9,6 @@ import {
   validateActivity,
 } from '@/helper';
 
-const DOCUMENT_TYPES = {
-  Buy: 'Buy',
-  Dividend: 'Dividend',
-};
-
 const BROKER_NAME = 'quirion';
 
 // This is a sample Buy activity:
@@ -71,9 +66,22 @@ const findIsinAndAmountInLine = line => {
   };
 };
 
-const findNextBuy = (flatContent, index) => {
+const findNextBuyOrSell = (flatContent, index) => {
+  /** @type {Importer.ActivityTypeUnion} */
+  let type;
+
   while (index < flatContent.length) {
     if (flatContent[index] === 'Wertpapier Kauf') {
+      type = 'Buy';
+      break;
+    }
+
+    if (
+      index + 1 < flatContent.length &&
+      flatContent[index] === 'Wertpapier' &&
+      flatContent[index + 1] === 'Verkauf'
+    ) {
+      type = 'Sell';
       break;
     }
 
@@ -84,14 +92,17 @@ const findNextBuy = (flatContent, index) => {
     return undefined;
   }
 
+  /** @type {Partial<Importer.Activity>} */
   const activity = {
     broker: BROKER_NAME,
-    type: DOCUMENT_TYPES.Buy,
+    type,
     // No information about fee and tax in the Kontoauszug
     fee: 0,
     tax: 0,
     // Price is negativ
-    amount: +Big(parseGermanNum(flatContent[index - 4])).mul(-1),
+    amount: +Big(parseGermanNum(flatContent[index - 4])).mul(
+      type === 'Buy' ? -1 : 1
+    ),
   };
 
   [activity.date, activity.datetime] = createActivityDateTime(
@@ -99,7 +110,7 @@ const findNextBuy = (flatContent, index) => {
   );
 
   // Skip "Wertpapier Kauf", "Ref" and ".: <Number of Ref>"
-  index += 3;
+  index += type === 'Buy' ? 3 : 4;
 
   const partialName = [];
   let isinAndShares;
@@ -111,7 +122,7 @@ const findNextBuy = (flatContent, index) => {
 
   activity.company = partialName.join('');
   activity.isin = isinAndShares.isin;
-  activity.shares = isinAndShares.shares;
+  activity.shares = +Big(isinAndShares.shares).mul(type === 'Sell' ? -1 : 1);
   activity.price = +Big(activity.amount).div(activity.shares);
 
   return {
@@ -120,13 +131,13 @@ const findNextBuy = (flatContent, index) => {
   };
 };
 
-const createActivitiesForBuy = flatContent => {
+const createActivitiesForBuyOrSell = flatContent => {
   const activities = [];
 
   let currentIndex = 0;
 
   while (currentIndex < flatContent.length) {
-    const buy = findNextBuy(flatContent, currentIndex);
+    const buy = findNextBuyOrSell(flatContent, currentIndex);
 
     if (buy === undefined) {
       break;
@@ -310,9 +321,12 @@ const findDividendCompany = content => {
 };
 
 const createActivitiesForDividend = flatContent => {
+  /** @type {Importer.ActivityTypeUnion} */
+  let type = 'Dividend';
+
   const activity = {
     broker: BROKER_NAME,
-    type: DOCUMENT_TYPES.Dividend,
+    type,
     // No information about fee in the Erträgnisabrechnung
     fee: 0,
     company: findDividendCompany(flatContent),
@@ -329,13 +343,13 @@ const createActivitiesForDividend = flatContent => {
   return [validateActivity(activity)];
 };
 
-const parseData = (flatContent, type) => {
-  switch (type) {
-    case DOCUMENT_TYPES.Buy:
-      return createActivitiesForBuy(flatContent);
+const parseData = flatContent => {
+  if (isDocumentBuyOrSell(flatContent)) {
+    return createActivitiesForBuyOrSell(flatContent);
+  }
 
-    case DOCUMENT_TYPES.Dividend:
-      return createActivitiesForDividend(flatContent);
+  if (isDocumentDividend(flatContent)) {
+    return createActivitiesForDividend(flatContent);
   }
 
   return [];
@@ -362,21 +376,24 @@ const hasClutteredText = (content, startText, length, textToFind) => {
   return combinedText === textToFind;
 };
 
-const getDocumentType = content => {
-  if (content.includes('Kontoauszug')) {
-    return DOCUMENT_TYPES.Buy;
-  }
-
+const isDocumentBuyOrSell = content => {
+  // We're looking for the following four consecutive entries
+  // "Wertpapier",
+  // "Verkauf",
+  // or
+  // "Wertpapier Kauf"
+  return (
+    content.includes('Wertpapier Kauf') ||
+    hasClutteredText(content, 'Wertpapier', 2, 'Wertpapier Verkauf')
+  );
+};
+const isDocumentDividend = content => {
   // We're looking for the following four consecutive entries
   // "Erträ",
   // "gnisabrec",
   // "hn",
   // "ung",
-  if (hasClutteredText(content, 'Erträ', 4, 'Erträgnisabrechnung')) {
-    return DOCUMENT_TYPES.Dividend;
-  }
-
-  return undefined;
+  return hasClutteredText(content, 'Erträ', 4, 'Erträgnisabrechnung');
 };
 
 export const canParseDocument = (pages, extension) => {
@@ -397,14 +414,13 @@ export const canParseDocument = (pages, extension) => {
   return (
     extension === 'pdf' &&
     isQuirinCompany &&
-    getDocumentType(firstPageContent) !== undefined
+    (isDocumentBuyOrSell(firstPageContent) ||
+      isDocumentDividend(firstPageContent))
   );
 };
 
 export const parsePages = contents => {
-  const type = getDocumentType(contents[0]);
-
-  const activities = parseData(contents.flat(), type);
+  const activities = parseData(contents.flat());
 
   if (!activities.length) {
     return {
@@ -418,3 +434,5 @@ export const parsePages = contents => {
     status: 0,
   };
 };
+
+export const parsingIsTextBased = () => true;

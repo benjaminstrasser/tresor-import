@@ -8,7 +8,14 @@ export enum ActivityType {
   TAX_DIVIDEND = 'TaxDividend',
 }
 
-export type ActivityTypeUnion = `${ActivityType}`;
+export type ActivityTypeUnion =
+  | 'Buy'
+  | 'Sell'
+  | 'Dividend'
+  | 'TransferIn'
+  | 'TransferOut'
+  | 'Payback'
+  | 'TaxDividend';
 
 export enum ParserStatus {
   SUCCESS = 0,
@@ -40,9 +47,9 @@ export interface Activity {
 }
 
 export interface Implementation {
-  canParseDocument(pages: page[], extension: string);
-  parsePages(contents);
-  parsingIsTextBased() : boolean;
+  canParseDocument(pages: Page[], extension: string): boolean;
+  parsePages(contents): ParserResult;
+  parsingIsTextBased(): boolean;
 }
 
 export interface ParserResult {
@@ -50,10 +57,10 @@ export interface ParserResult {
   status: ParserStatus;
 }
 
-export type page = string[];
+export type Page = string[];
 
 export interface ParsedFile {
-  pages: page[];
+  pages: Page[];
   extension: string;
 }
 

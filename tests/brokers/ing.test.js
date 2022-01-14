@@ -1,5 +1,6 @@
-import { findImplementation } from '../../src';
 import * as ing from '../../src/brokers/ing';
+import { findImplementation } from '../../src';
+import { validateAllSamples } from '../setup/brokers';
 import {
   buySamples,
   sellSamples,
@@ -20,22 +21,9 @@ describe('Broker: ING', () => {
     depotStatement
   );
 
+  validateAllSamples(ing, allSamples);
+
   describe('Check all documents', () => {
-    test('Can the document parsed with ING', () => {
-      allSamples.forEach(pages => {
-        expect(ing.canParseDocument(pages, 'pdf')).toEqual(true);
-      });
-    });
-
-    test('Can identify a implementation from the document as ING', () => {
-      allSamples.forEach(pages => {
-        const implementations = findImplementation(pages, 'pdf');
-
-        expect(implementations.length).toEqual(1);
-        expect(implementations[0]).toEqual(ing);
-      });
-    });
-
     test('Should not identify ing as broker if ing BIC is not present', () => {
       invalidSamples.forEach(pages => {
         const implementations = findImplementation(pages, 'pdf');
@@ -516,6 +504,27 @@ describe('Broker: ING', () => {
         fee: 28.43790445683688,
         tax: 103.42,
         fxRate: 1.171324,
+        foreignCurrency: 'USD',
+      });
+    });
+
+    test('Can parse document: 2021_IE00BK1PV551', () => {
+      const activities = ing.parsePages(dividendsSamples[10]).activities;
+
+      expect(activities.length).toEqual(1);
+      expect(activities[0]).toEqual({
+        broker: 'ing',
+        type: 'Dividend',
+        date: '2021-09-30',
+        datetime: '2021-09-30T' + activities[0].datetime.substring(11),
+        isin: 'IE00BK1PV551',
+        company: 'Xtr.(IE) - MSCI World Registered Shares 1D o.N.',
+        shares: 490,
+        price: 0.2850017198379645,
+        amount: 139.64739442393187,
+        fee: 0,
+        tax: 25.78,
+        fxRate: 1.159993,
         foreignCurrency: 'USD',
       });
     });

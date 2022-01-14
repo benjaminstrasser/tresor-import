@@ -35,10 +35,21 @@ const getBroker = content => {
   }
 
   if (
+    content.some(line => line.includes('finanzen.net zero GmbH')) ||
+    content.some(line => line.includes('DonauCapital Pure Investment GmbH'))
+  ) {
+    return 'finanzen.zero';
+  }
+
+  if (
     content.some(line => line.includes('Scalable Capital Vermögensverw')) ||
     content.some(line => line.includes('www.scalable.capital'))
   ) {
     return 'scalablecapital';
+  }
+
+  if (content.some(line => line.includes('Smavesto GmbH'))) {
+    return 'smavesto';
   }
 };
 

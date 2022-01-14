@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 /**
  * Checks if document can be parsed by generic csv parser
  *
- * @param {Importer.page[]} doc - file to be parsed
+ * @param {Importer.Page[]} doc - file to be parsed
  * @param {string} extension - extension of file to be parsed
  * @returns {boolean} - true if can be parsed, false otherwise
  */
@@ -59,11 +59,16 @@ export const parsePages = content => {
   // parse every content row
   // return empty activity array and status code on error
   for (let i = 0; i < content.length; i++) {
+    const line = content[i].trim();
+    if (line.length === 0) {
+      continue;
+    }
+
     // try catch for error here --> the further we throw, the better
     // --> just doing it here, to show what we could do with custom errors
     //     possibly better: catch error in function calling 'parsePages'
     try {
-      const activity = parseRow(lowerCaseHeaders, content[i]);
+      const activity = parseRow(lowerCaseHeaders, line);
       if (activity) activities.push(activity);
     } catch (error) {
       console.error(
